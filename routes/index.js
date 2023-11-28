@@ -1,5 +1,4 @@
 const { Router } = require("express");
-const pool = require("../config/db");
 const router = Router();
 
 router.use("/jobs", require("./jobs"));

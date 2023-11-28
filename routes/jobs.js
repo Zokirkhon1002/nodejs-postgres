@@ -1,5 +1,4 @@
 const { Router } = require("express");
-const pool = require("../config/db");
 const returnResult = require("../common/functions");
 const handleErrorResponse = require("../common/functions");
 const jobService = require("../services/jobServices");

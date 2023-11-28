@@ -1,19 +1,40 @@
 const express = require("express");
-require("dotenv").config();
+const dotenv = require("dotenv");
 
-const app = express();
-const PORT = process.env.PORT || 4000;
+class Server {
+  constructor() {
+    this.app = express();
+    this.setupEnvironment();
+  }
 
-app.use(express.json());
+  setupEnvironment() {
+    dotenv.config();
+    this.port = process.env.PORT || 4000;
+    this.configureExpress();
+  }
 
-app.get("/", (req, res) => {
-  res.status(200).json({ state: true, message: "it's working perfectly" });
-});
+  configureExpress() {
+    this.app.use(express.json());
+    this.setupRootRoute();
+  }
 
-// initials routes
-const routes = require("./routes");
-app.use("/api", routes);
+  setupRootRoute() {
+    this.app.get("/", (req, res) => {
+      res.status(200).json({ success: true, message: "Server is working perfectly" });
+    });
+    this.setupRoutes();
+  }
 
-app.listen(PORT, () => {
-  console.log(`server running on port: ${PORT}`);
-});
+  setupRoutes() {
+    this.app.use("/api", require("./routes"));
+    this.startServer();
+  }
+
+  startServer() {
+    this.app.listen(this.port, () => {
+      console.log(`Server is running on port: ${this.port}`);
+    });
+  }
+}
+
+new Server();
