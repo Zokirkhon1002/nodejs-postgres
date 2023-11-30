@@ -2,7 +2,7 @@ const pool = require("../config/db");
 
 class JobService {
   async getAllJobs() {
-    const query = `SELECT * from job`;
+    const query = `SELECT * FROM job`;
     const { rows: jobs } = await pool.query(query);
     return jobs;
   }

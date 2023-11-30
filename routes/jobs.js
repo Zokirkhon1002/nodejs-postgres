@@ -38,7 +38,7 @@ router.delete("/:id", async (req, res) => {
       res.status(404).json(returnResult(false, "Employer not found", null));
       return;
     }
-    res.status(204).json(returnResult(true, "success", []));
+    res.status(200).json(returnResult(true, "success", []));
   } catch (error) {
     handleErrorResponse(res, error);
   }
